@@ -66,20 +66,20 @@ const Search = ({search, onSearch}) => {
 
 const List = ({list}) =>  (
   <ul>
-    {list.map((item) => (
-      <Item key={item.objectID} item={item}/>
+    {list.map(({objectID, ...item}) => (
+      <Item key={item.objectID} {...item} />
     ))}
   </ul>
 )
 
-const Item = ({item}) => (
+const Item = ({objectID, title, url, author, num_comments, points}) => (
   <li>
     <span>
-      <a href={item.url}>{item.title} </a>
+      <a href={url}>{title} </a>
     </span>
-    <span> {item.author} </span>
-    <span> {item.num_comments} </span>
-    <span> {item.points} </span>
+    <span> {author} </span>
+    <span> {num_comments} </span>
+    <span> {points}</span>
 
   </li>
 )
@@ -125,6 +125,48 @@ const Test = () => {
 
   console.log('######################################')
   console.log(firstName3 + ' has a pet called ' + name3)
+
+  //Javascript spread & Rest orperators
+  console.log('######################################')
+  console.log("# Javascript Spread & Rest Operators #")
+  console.log('######################################')
+
+  console.log('####        Spread       ###')
+  const profile = {
+    firstName: 'Robin',
+    lastName: 'Weiruch'
+  }
+
+  const address = {
+    country: 'Germany',
+    city: 'Berlin'
+  }
+
+  //Spread
+  const userSpread = {
+    ...profile,
+    gender: 'male',
+    ...address
+  }
+
+  console.log(userSpread)
+
+  //Rest
+  console.log('####        Rest       ###')
+  const userRest = {
+    id: '1',
+    firstName: 'Robin',
+    lastName: 'Weiruch',
+    country: 'Germany',
+    city: 'Berlin',
+  }
+
+  const {id, country, city, ...userWithoutAddress} = userRest
+
+  console.log(userWithoutAddress)
+  console.log(id)
+  console.log(city)
+  
 
   
 }
