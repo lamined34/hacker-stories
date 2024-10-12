@@ -26,14 +26,22 @@ const App = () => {
     }
   ]
 
-  const [searchTerm, setSearchTerm] = React.useState(
-    localStorage.getItem('search') || 'React'
-  )
+  const useStorageState = (initialState) => {
+    const [value, setValue] = React.useState(
+      localStorage.getItem('search') || initialState
+    )
 
-  //This is a react use effect, the function is fired each time the value of searchTerm change
-  React.useEffect(() => {
-    localStorage.setItem('search', searchTerm)
-  }, [searchTerm])
+    console.log(value + "##################")
+
+    //This is a react use effect, the function is fired each time the value of searchTerm change
+    React.useEffect(() => {
+      localStorage.setItem('search', value)
+    }, [value])
+
+    return [value, setValue]
+  }
+
+  const [searchTerm, setSearchTerm] = useStorageState('React')
 
   const handleSearch = (event) => {
     setSearchTerm(event.target.value)
